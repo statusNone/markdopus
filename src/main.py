@@ -5,12 +5,12 @@ from gencontent import generate_pages_recursive
 def main():
     source = "./static"
     destination = "./docs"
-    base_path = sys.argv[0] or "/"
+    base_path = sys.argv[1] if len(sys.argv) > 1 else "/"
     if os.path.exists(destination):
         shutil.rmtree(destination)
     os.mkdir(destination)
     copy_dir_contents(source, destination)
-    generate_pages_recursive(base_path, "content/", "template.html", "public/")
+    generate_pages_recursive(base_path, "content/", "template.html", destination)
 
 def copy_dir_contents(source, destination):
     contents = os.listdir(source)
